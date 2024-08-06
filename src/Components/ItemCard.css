@@ -1,0 +1,13 @@
+.item-card{
+    height: 350px;
+    width: 250px;
+
+}
+.image-row{
+    height: 70%;
+    width: 70%;
+}
+img {
+    height: 100%;
+    width: 100%;
+}
