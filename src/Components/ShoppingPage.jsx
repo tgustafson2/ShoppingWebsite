@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import ItemCard from "./ItemCard";
+import { useOutletContext } from "react-router-dom";
 
-function ShoppingPage({ itemsArr, addToCart }) {
-  const items = itemsArr;
-  const [currItems, setCurrItems] = useState(items);
+function ShoppingPage() {
+  const {itemsArr, addToCart} = useOutletContext();
+  // console.log(items);
+  const [currItems, setCurrItems] = useState(itemsArr);
   const [sortSetting, setSortSetting] = useState("default");
   const [filter, setFilter] = useState("");
   useEffect(() => {
-    let itemsResult = [...items];
+    let itemsResult = [...itemsArr];
     const re = new RegExp(filter, "i");
     if (filter !== "") {
-      itemsResult = itemsResult.filter((item) => re.test(item.title));
+      itemsResult = itemsResult.filter((item) => re.test(item.title) || re.test(item.description));
     }
     if (sortSetting !== "default") {
       if (sortSetting === "price-asc") {
@@ -19,6 +21,8 @@ function ShoppingPage({ itemsArr, addToCart }) {
         itemsResult = itemsResult.sort((a, b) => b.price - a.price);
       }
     }
+    // console.log(itemsResult);
+    setCurrItems(itemsResult);
   }, [sortSetting, filter]);
 
   return (
@@ -34,12 +38,13 @@ function ShoppingPage({ itemsArr, addToCart }) {
         <option value="price-desc">Price: High to Low</option>
       </select>
       {currItems.map((item) => {
-        <ItemCard
+        return (<ItemCard
+          key={item.id}
           title={item.title}
           price={item.price}
-          imageUrl={item.url}
+          imageUrl={item.image}
           addToCart={addToCart}
-        />;
+        />)
       })}
     </>
   );
