@@ -249,16 +249,31 @@ const items = [
   }
 ]
 
-function foo(){
-  console.log("foo")
-}
 function App() {
-  const [count, setCount] = useState(0)
+  const [shoppingCart, setCart] = useState([]);
+  function addToCart(itemToAdd, title, price, imageUrl, count){
+      let tempArr = [...shoppingCart];
+      for(let i=0; i<tempArr.length; i++){
+        if(tempArr[i].id === itemToAdd){
+          tempArr[i].count +=count;
+          setCart(tempArr);
+          return;
+        }
+      }
+      tempArr.push({id:itemToAdd, title, price, imageUrl, count});
+      setCart(tempArr);
+  }
+  function removeFromCart(itemToRemove){
+    setCart(shoppingCart.filter(item=>item.id != itemToRemove));
+  }
+  function updateItemCart(itemToUpdate, newCount){
+
+  }
 
   return (
     <>
-      <Navbar shoppingItems={0}/>
-      <Outlet context={{itemsArr:items, addToCart:foo}}/>
+      <Navbar shoppingItems={shoppingCart}/>
+      <Outlet context={{itemsArr:items, addToCart, removeFromCart, cartItems:shoppingCart}}/>
     </>
   )
 }

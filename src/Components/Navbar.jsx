@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
+import "./Navbar.css";
 
-function Navbar(shoppingItems) {
-  console.log(shoppingItems);
+function Navbar({shoppingItems}) {
+  const itemCount = shoppingItems.reduce((total, item)=>{
+    return total + item.count;
+  }, 0);
   return (
     <nav>
       <ul>
@@ -11,7 +14,10 @@ function Navbar(shoppingItems) {
         <Link to="/shopping">Shopping</Link>
       </ul>
       <Link to="/checkout">
-        <ShoppingCart className="shoppingCart" />
+        <div className="shoppingCart" value={itemCount}>
+        <ShoppingCart />
+        </div>
+        
       </Link>
     </nav>
   );

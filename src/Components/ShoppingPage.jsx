@@ -40,6 +40,7 @@ function ShoppingPage() {
       {currItems.map((item) => {
         return (<ItemCard
           key={item.id}
+          id={item.id}
           title={item.title}
           price={item.price}
           imageUrl={item.image}

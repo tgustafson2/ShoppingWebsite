@@ -2,6 +2,7 @@ import HomePage from "./Components/HomePage";
 import ShoppingPage from "./Components/ShoppingPage";
 import App from "./App.jsx";
 import ErrorPage from "./Components/ErrorPage.jsx";
+import CheckoutPage from "./Components/CheckoutPage.jsx";
 
 const routes = [
   {
@@ -13,6 +14,7 @@ const routes = [
         path: "/shopping",
         element: <ShoppingPage />,
       },
+      {path: "/checkout", element: <CheckoutPage />},
     ],
     errorElement: <ErrorPage/>
   },

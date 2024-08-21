@@ -3,7 +3,7 @@ import { Plus, Minus } from "lucide-react";
 import "./ItemCard.css"
 
 
-function ItemCard({title, price, imageUrl, addToCart}){
+function ItemCard({id, title, price, imageUrl, addToCart}){
     const [count, setCount] = useState(1);
     const incrmentCount = () => {
         if(isNaN(parseInt(count))){
@@ -29,7 +29,7 @@ function ItemCard({title, price, imageUrl, addToCart}){
 
     const checkIfAdd = () =>{
         if(count!==""){
-            addToCart(title,price,count);
+            addToCart(id,title, price, imageUrl, count);
             setCount(1);
         }
     }
